@@ -245,6 +245,7 @@ class DataStream[T](stream: JavaStream[T]) {
   def getSideOutput[X: TypeInformation](tag: OutputTag[X]): DataStream[X] = javaStream match {
     case stream : SingleOutputStreamOperator[X] =>
       asScalaStream(stream.getSideOutput(tag: OutputTag[X]))
+    case _ => throw new UnsupportedOperationException("Only supported for operators.")
   }
 
   /**
